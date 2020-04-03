@@ -1,22 +1,18 @@
-from random import randint
+import random
 
 NUM_CARDS = 52
 
-
 def get_random_number(k):
-    return randint(0, k)
-
+    return random.randint(1, k)
 
 def shuffle_card_deck():
-    cards = [x for x in range(NUM_CARDS)]
-
-    for old_pos in cards:
-        new_pos = old_pos + get_random_number(NUM_CARDS - old_pos - 1)
-        temp = cards[new_pos]
-        cards[new_pos] = cards[old_pos]
-        cards[old_pos] = temp
-
-    return cards
+    card_deck = [idx for idx in range(NUM_CARDS)]
+    for end_idx in range(NUM_CARDS - 1, -1, -1):
+        random_idx = get_random_number(end_idx + 1) - 1
+        tmp_value = card_deck[end_idx]
+        card_deck[end_idx] = card_deck[random_idx]
+        card_deck[random_idx] = tmp_value
+    return card_deck
 
 
 for _ in range(10):
